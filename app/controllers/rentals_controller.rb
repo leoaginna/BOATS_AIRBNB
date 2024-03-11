@@ -7,6 +7,10 @@ class RentalsController < ApplicationController
     @rental = Rental.find params[:id]
   end
 
+  def edit
+    @rental = Rental.find params[:id]
+  end
+
   def create
     @rental = Rental.new rental_params
     @rental.user = current_user
