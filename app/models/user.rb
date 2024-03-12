@@ -6,6 +6,6 @@ class User < ApplicationRecord
 
   has_many :rentals
   has_many :boats, through: :rentals
-
+  belongs_to :boat
 
 end
