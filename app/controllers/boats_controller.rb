@@ -3,6 +3,10 @@ class BoatsController < ApplicationController
     @boats = Boat.all
   end
 
+  def my_boats
+    @my_boats = Boat.where(user_id: current_user.id)
+  end
+
   def show
     @boat = Boat.find params[:id]
   end
@@ -38,6 +42,7 @@ class BoatsController < ApplicationController
     @boat.destroy
     redirect_to boats_path, status: :see_others
   end
+
 
   private
 

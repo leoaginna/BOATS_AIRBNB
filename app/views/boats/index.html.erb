@@ -17,7 +17,7 @@
     <p>Description: <%= boat.description %></p>
     <p>Price per hour: <%= number_to_currency(boat.price) %></p>
     <% if user_signed_in? %>
-      <%= link_to "Rent this boat", new_boat_rental_path(boat), class: "btn btn-primary" %>
+      <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-primary" %>
     <% else %>
       <%= link_to "Sign in to rent this boat", new_user_session_path, class: "btn btn-primary" %>
     <% end %>
