@@ -1,2 +1,46 @@
-<h1>Rentals#edit</h1>
-<p>Find me in app/views/rentals/edit.html.erb</p>
+
+<h1>My Rentals</h1>
+
+<% if @my_rentals.present? %>
+  <ul>
+    <% @my_rentals.each do |rental| %>
+      <li>
+        <strong><%= rental.name %></strong>
+        <% if rental.image.attached? %>
+          <% image_tag rental.image.variant(resize: "100x100") %>
+        <% end %>
+        <p><strong>Price:</strong> <%= rental.price %></p>
+        <p><strong>Description:</strong> <%= rental.description %></p>
+        <p><strong>Reservation Dates:</strong> <%= rental.start_date.strftime("%Y-%m-%d") %> to <%= rental.end_date.strftime("%Y-%m-%d") %></p>
+        <%= link_to 'Cancel rental', rentals_path, method: :delete, data: { confirm: '¿Estás seguro que quieres cancelar este alquiler?' } %>
+        <%= link_to 'Edit rental', boat_path, class: "btn btn-primary btn-sm" %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no rentals</p>
+<% end %>
+
+
+<h1>Rental History</h1>
+
+<% past_rentals = @my_rentals.select { |rental| rental.end_date < Date.today } %>
+
+<% if past_rentals.present? %>
+  <ul>
+    <% past_rentals.each do |rental| %>
+      <li>
+        <strong><%= rental.name %></strong>
+        <% if rental.image.attached? %>
+          <% image_tag rental.image.variant(resize: "100x100") %>
+        <% end %>
+        <p><strong>Price:</strong> <%= rental.price %></p>
+        <p><strong>Description:</strong> <%= rental.description %></p>
+        <p><strong>Reservation Dates:</strong> <%= rental.start_date.strftime("%Y-%m-%d") %> to <%= rental.end_date.strftime("%Y-%m-%d") %></p>
+        <%= link_to 'Details', rental_path(rental) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no past rentals</p>
+<% end %>
