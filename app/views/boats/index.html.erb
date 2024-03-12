@@ -1,0 +1,25 @@
+
+
+<h1>Welcome to Boat Rentals!</h1>
+
+<% if user_signed_in? %>
+  <p>Welcome, <%= current_user.email %>!</p>
+  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path %>
+  <%= link_to "Sign in", new_user_session_path %>
+<% end %>
+
+<h2>Available Boats</h2>
+<% @boats.each do |boat| %>
+  <div class="boat">
+    <h3><%= boat.name %></h3>
+    <p>Description: <%= boat.description %></p>
+    <p>Price per hour: <%= number_to_currency(boat.price_per_hour) %></p>
+    <% if user_signed_in? %>
+      <%= link_to "Rent this boat", new_boat_rental_path(boat), class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "Sign in to rent this boat", new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% end %>
