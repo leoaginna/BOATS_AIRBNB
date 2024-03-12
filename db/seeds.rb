@@ -8,13 +8,14 @@ puts 'Creating a boat...'
     email: Faker::Internet.email,
     password: Faker::Internet.password
   )
+  user.save!
   boat = Boat.new(
     name: Faker::Name.female_first_name,
     description: Faker::Lorem.paragraph,
     price: Faker::Number.decimal(l_digits: 2),
     available: Faker::Boolean.boolean,
     address: Faker::Address.full_address,
-    # users_id: 1
+    user_id: 1
   )
   boat.save!
 end
