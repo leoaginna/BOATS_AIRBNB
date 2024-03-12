@@ -1,4 +1,4 @@
-class RentalsController < ApplicationController
+Reclass RentalsController < ApplicationController
   def index
     @rentalss = Rental.all
   end
