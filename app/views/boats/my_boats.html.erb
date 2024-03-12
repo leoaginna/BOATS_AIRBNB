@@ -12,10 +12,12 @@
         <% end %>
         <p><strong>Price:</strong> <%= boat.price %></p>
         <p><strong>Description:</strong> <%= boat.description %></p>
+        <%= link_to 'Eliminar', boat_path(boat), data: {turbo_method: :delete} %>
       </li>
     <% end %>
   </ul>
-<% else %>
+  <% else %>
   <p>You have no boats</p>
+
 <% end %>
 
