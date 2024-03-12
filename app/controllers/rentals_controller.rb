@@ -1,6 +1,8 @@
-Reclass RentalsController < ApplicationController
+class RentalsController < ApplicationController
   def index
     @rentalss = Rental.all
+    @my_rentals = Rental.where(user_id: current_user.id)
+    @past_rentals = @my_rentals.select { |rental| rental.end_date < Date.today }
   end
 
   def create
