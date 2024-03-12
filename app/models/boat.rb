@@ -1,6 +1,6 @@
 class Boat < ApplicationRecord
   has_many :rentals
-  has_many :users, through: :rentals
+  belongs_to :user
   validates :name, :description, :price, :address, presence: true
   has_many_attached :photos
 end
