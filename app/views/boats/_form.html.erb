@@ -4,5 +4,5 @@
   <%= f.input :price %>
   <%= f.input :address %>
   <%= f.input :photo, as: :file, input_html: { multiple: true } %>
-  <%= f.button :submit, "Create Boat" %>
+  <%= f.button :submit, @boat.nil? ? "Create Boat" : "Update boat" %>
 <% end %>

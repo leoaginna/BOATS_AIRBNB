@@ -3,5 +3,7 @@
 <p><%= @boat.price %></p>
 <p><%= @boat.address %></p>
 
-
-<%= link_to 'Book', boat_rentals_path(@boat), class: 'btn btn-outline-primary' %>
+<div class="flex">
+  <%= link_to 'Book', boat_rentals_path(@boat), class: 'btn btn-outline-primary' %>
+  <%= link_to 'Back to home', boats_path, class: 'btn btn-outline-success' %>
+</div>

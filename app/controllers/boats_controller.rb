@@ -17,8 +17,9 @@ class BoatsController < ApplicationController
 
   def create
     @boat = Boat.new boat_params
+    @boat.user = current_user
     if @boat.save
-      redirect_to @boat, status: :see_others
+      redirect_to @boat, status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +32,7 @@ class BoatsController < ApplicationController
   def update
     @boat = Boat.find params[:id]
     if @boat.update boat_params
-      redirect_to @boat, status: :see_others
+      redirect_to @boat, status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +41,7 @@ class BoatsController < ApplicationController
   def delete
     @boat = Boat.find params[:id]
     @boat.destroy
-    redirect_to boats_path, status: :see_others
+    redirect_to boats_path, status: :see_other
   end
 
 
