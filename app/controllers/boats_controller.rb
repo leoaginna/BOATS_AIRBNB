@@ -3,10 +3,10 @@ class BoatsController < ApplicationController
     @boats = Boat.all
   end
 
-  def my_boat
-    @my_boats = current_user.boats
+  def my_boats
+    @my_boats = Boat.where(user_id: current_user.id)
   end
-  
+
   def show
     @boat = Boat.find params[:id]
   end
