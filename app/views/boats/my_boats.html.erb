@@ -1,0 +1,24 @@
+
+
+<h1>My Boats</h1>
+
+<% if @my_boats.present? %>
+  <ul>
+    <% @my_boats.each do |boat| %>
+      <li>
+        <strong><%= boat.name %></strong>
+        <%# if boat.image.attached? %>
+          <%# image_tag boat.image.variant(resize: "100x100") %>
+        <%# end %>
+        <p><strong>Price:</strong> <%= boat.price %></p>
+        <p><strong>Description:</strong> <%= boat.description %></p>
+        <%= link_to 'Eliminar', boat_path(boat), data: {turbo_method: :delete} %>
+        <%= link_to 'Editar', edit_boat_path(boat), class: "btn btn-primary btn-sm" %>
+        <%= button_to 'Suspender', boat_path(boat), method: :patch, params: { boat: { available: false } }, class: "btn btn-warning btn-sm" %>
+      </li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>You have no boats</p>
+
+<% end %>

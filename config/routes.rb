@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root "boats#index"
-  resources :boats, except: :index do
+  resources :boats do
     resources :rentals, only: [:create]
   end
-  resources :rentals, only: [:index, :update, :cancel]
+  resources :rentals, only: [:index, :show, :edit, :update, :cancel]
+  get "/myboats", to: "boats#my_boats", as: "myboats"
 end
