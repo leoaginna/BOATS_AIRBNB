@@ -5,6 +5,5 @@ Rails.application.routes.draw do
     resources :rentals, only: [:create]
   end
   resources :rentals, only: [:index, :show, :edit, :update, :cancel]
-
   get "/myboats", to: "boats#my_boats", as: "myboats"
 end
