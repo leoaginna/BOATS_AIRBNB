@@ -1,0 +1,21 @@
+
+
+<h1>My Boats</h1>
+
+<% if @my_boats.present? %>
+  <ul>
+    <% @my_boats.each do |boat| %>
+      <li>
+        <strong><%= boat.name %></strong>
+        <% if boat.image.attached? %>
+          <%= image_tag boat.image.variant(resize: "100x100") %> #we can redefine the picture size here
+        <% end %>
+        <p><strong>Price:</strong> <%= boat.price %></p>
+        <p><strong>Description:</strong> <%= boat.description %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no boats</p>
+<% end %>
+
