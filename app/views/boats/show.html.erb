@@ -1,8 +1,14 @@
-  <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
+<%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
 
 <h1><%= @boat.name %></h1>
 <p><%= @boat.description %></p>
 <p><%= @boat.price %></p>
 <p><%= @boat.address %></p>
 
-<%= link_to 'Book', rentals_path, class: 'btn btn-outline-primary' %>
+
+<%= simple_form_for @rental do |f| %>
+  <%= f.input :start_time %>
+  <%= f.input :end_time %>
+  <%= f.hidden_field :boat_id, value: @boat.id %>
+  <%= f.button :submit, 'Book', class: 'btn btn-primary' %>
+<% end %>
