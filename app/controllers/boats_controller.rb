@@ -47,7 +47,7 @@ class BoatsController < ApplicationController
       @boat.destroy
       redirect_to myboats_path, status: :see_other, notice: "Boat successfully deleted."
     else
-      redirect_to myboats_path, status: :see_other, alert: "Cannot delete boat with existing rentals."
+      redirect_to myboats_path, status: :see_other, alert: "Cannot delete boat with rentals pending"
     end
   end
 
