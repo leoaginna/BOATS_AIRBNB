@@ -34,7 +34,7 @@ class BoatsController < ApplicationController
   def update
     @boat = Boat.find params[:id]
     if @boat.update boat_params
-      redirect_to @boat, status: :see_other
+      redirect_to myboats_path, status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
