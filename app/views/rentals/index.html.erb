@@ -17,12 +17,8 @@
       </li>
     <% end %>
   </ul>
-<% else %>
-  <p>You have no rentals</p>
-<% end %>
 
-
-<h1>Rental History</h1>
+  <h1>Rental History</h1>
 
 <% past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today } %>
 
@@ -41,7 +37,9 @@
       </li>
     <% end %>
   </ul>
-<% else %>
-  <p>You have no past rentals</p>
+    <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
 <% end %>
-  <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
+<% else %>
+  <p>No boats booked...yet!</p>
+    <%= link_to 'Find the perfect Boat for you!', root_path, class: 'btn btn-outline-success' %>
+<% end %>
