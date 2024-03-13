@@ -14,9 +14,11 @@
         </div>
         <p><strong>Price:</strong> <%= boat.price %></p>
         <p><strong>Description:</strong> <%= boat.description %></p>
-        <%= link_to 'Delete', boat_path(boat), data: {turbo_method: :delete} %>
-        <%= link_to 'Edit', edit_boat_path(boat), class: "btn btn-primary btn-sm" %>
-        <%= button_to 'Suspend', boat_path(boat), method: :patch, params: { boat: { available: false } }, class: "btn btn-warning btn-sm" %>
+        <div class="links d-flex justify-content-around">
+          <%= link_to 'Edit', edit_boat_path(boat), class: "btn btn-outline-primary btn-sm" %>
+          <%= button_to 'Suspend', boat_path(boat), method: :patch, params: { boat: { available: false } }, class: "btn btn-outline-warning btn-sm" %>
+          <%= link_to "Delete", delete_my_boat_path(boat), class: "btn btn-outline-danger rounded shadow", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        </div>
       </li>
     <% end %>
   </ul>
