@@ -43,8 +43,12 @@ class BoatsController < ApplicationController
 
   def delete_my_boat
     @boat = Boat.find(params[:id])
-    @boat.destroy
-    redirect_to myboats_path, status: :see_other
+    if @boat.rentals.empty?
+      @boat.destroy
+      redirect_to myboats_path, status: :see_other, notice: "Boat successfully deleted."
+    else
+      redirect_to myboats_path, status: :see_other, alert: "Cannot delete boat with existing rentals."
+    end
   end
 
 
