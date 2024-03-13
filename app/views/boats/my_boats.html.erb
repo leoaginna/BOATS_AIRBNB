@@ -7,9 +7,11 @@
     <% @my_boats.each do |boat| %>
       <li>
         <strong><%= boat.name %></strong>
-        <%# if boat.image.attached? %>
-          <%# image_tag boat.image.variant(resize: "100x100") %>
-        <%# end %>
+        <div>
+          <% boat.photos.each do |photo| %>
+            <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+          <% end %>
+        </div>
         <p><strong>Price:</strong> <%= boat.price %></p>
         <p><strong>Description:</strong> <%= boat.description %></p>
         <%= link_to 'Delete', boat_path(boat), data: {turbo_method: :delete} %>
@@ -24,4 +26,3 @@
 <% end %>
 
   <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
-
