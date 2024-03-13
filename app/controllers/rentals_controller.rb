@@ -6,11 +6,10 @@ class RentalsController < ApplicationController
   end
 
   def create
-    @boat = Boat.find params[:boat_id]
+    @boat = Boat.find params[:rental][:boat_id]
     @rental = Rental.new rental_params
     @rental.user = current_user
     @rental.boat = @boat
-    raise
     if @rental.save
       redirect_to rentals_path, status: :see_other
     else
