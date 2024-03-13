@@ -1,9 +1,8 @@
+  <%= link_to 'Back to home', boats_path, class: 'btn btn-outline-success' %>
+
 <h1><%= @boat.name %></h1>
 <p><%= @boat.description %></p>
 <p><%= @boat.price %></p>
 <p><%= @boat.address %></p>
 
-<div class="flex">
-  <%= link_to 'Book', boat_rentals_path(@boat), class: 'btn btn-outline-primary' %>
-  <%= link_to 'Back to home', boats_path, class: 'btn btn-outline-success' %>
-</div>
+<%= link_to 'Book', rentals_path, class: 'btn btn-outline-primary' %>
