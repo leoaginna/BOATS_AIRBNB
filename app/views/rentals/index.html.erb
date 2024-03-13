@@ -1,22 +1,24 @@
+<% past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today } %>
+<% current_rentals = @my_rentals.select { |rental| rental.end_time >= Date.today } %>
+<div class='d-flex justify-content-between mb-4'>
+  <h1>My Rentals</h1>
+  <div><%= link_to 'Book another Boat!', root_path, class: 'btn btn-outline-success' %></div>
+</div>
 
-<h1>My Rentals</h1>
 
-<% if @my_rentals.present? %>
-<div class="row row-cols-1 row-cols-md-2 g-4">
-  <% @my_rentals.each do |rental| %>
-    <div class="col">
+<% if current_rentals.present? %>
+  <ul>
+    <% current_rentals.each do |rental| %>
+    <div class="col m-3">
       <div class="card h-100">
-        <% if rental.boat.photos.attached? %>
-          <%= cl_image_tag rental.boat.photos.first.key, height: 200, width: 300, crop: :fill, class: "card-img-top img-fluid" %>
-        <% end %>
         <div class="card-body">
+          <div class='text-end'><p><strong>Booking number: </strong><%= rental.id %></p></div>
           <h5 class="card-title"><%= rental.boat.name %></h5>
           <p class="card-text"><strong>Price:</strong> <%= rental.boat.price %></p>
-          <p class="card-text"><strong>Description:</strong> <%= rental.boat.description %></p>
           <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
         </div>
         <div class="card-footer">
-          <%= link_to 'Cancel rental', rentals_path, class: "btn btn-danger btn-sm", turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Cancel rental', rentals_path, class: "btn btn-danger btn-sm text-white", turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
           <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
         </div>
       </div>
@@ -34,13 +36,10 @@
       <% past_rentals.each do |rental| %>
         <div class="col">
           <div class="card h-100">
-            <% if rental.boat.photos.attached? %>
-              <%= cl_image_tag rental.boat.photos.first.key, height: 200, width: 300, crop: :fill, class: "card-img-top img-fluid" %>
-            <% end %>
             <div class="card-body">
+              <div class='text-end bold'><p><strong>Booking number: </strong><%= rental.id %></p></div>
               <h5 class="card-title"><%= rental.boat.name %></h5>
               <p class="card-text"><strong>Price:</strong> <%= rental.boat.price %></p>
-              <p class="card-text"><strong>Description:</strong> <%= rental.boat.description %></p>
               <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
             </div>
           </div>
@@ -49,8 +48,10 @@
     </div>
     <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success mt-3' %>
   </div>
-<% else %>
-  <div class="container mt-5">
+<% end %>
+
+<% if !@my_rentals.present? %>
+ <div class="container mt-5">
     <p>No boats booked...yet!</p>
     <%= link_to 'Find the perfect Boat for you!', root_path, class: 'btn btn-outline-success' %>
   </div>
