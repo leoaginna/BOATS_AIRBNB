@@ -2,45 +2,56 @@
 <h1>My Rentals</h1>
 
 <% if @my_rentals.present? %>
-  <ul>
-    <% @my_rentals.each do |rental| %>
-      <li>
-        <strong><%= rental.boat.name %></strong>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% @my_rentals.each do |rental| %>
+    <div class="col">
+      <div class="card h-100">
         <% if rental.boat.photos.attached? %>
-          <%= cl_image_tag rental.boat.photos.first.key, height: 300, width: 400, crop: :fill %>
+          <%= cl_image_tag rental.boat.photos.first.key, height: 200, width: 300, crop: :fill, class: "card-img-top img-fluid" %>
         <% end %>
-        <p><strong>Price:</strong> <%= rental.boat.price %></p>
-        <p><strong>Description:</strong> <%= rental.boat.description %></p>
-        <p><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
-        <%= link_to 'Cancel rental', rentals_path, turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
-      </li>
+        <div class="card-body">
+          <h5 class="card-title"><%= rental.boat.name %></h5>
+          <p class="card-text"><strong>Price:</strong> <%= rental.boat.price %></p>
+          <p class="card-text"><strong>Description:</strong> <%= rental.boat.description %></p>
+          <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
+        </div>
+        <div class="card-footer">
+          <%= link_to 'Cancel rental', rentals_path, class: "btn btn-danger btn-sm", turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
     <% end %>
-  </ul>
-
-
+  <% end %>
+</div>
 
 <% past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today } %>
 
 <% if past_rentals.present? %>
-<h1>Rental History</h1>
-  <ul>
-    <% past_rentals.each do |rental| %>
-      <li>
-        <strong><%= rental.boat.name %></strong>
-        <% if rental.boat.photos.attached? %>
-          <%= cl_image_tag rental.boat.photos.first.key, height: 300, width: 400, crop: :fill %>
-        <% end %>
-        <p><strong>Price:</strong> <%= rental.boat.price %></p>
-        <p><strong>Description:</strong> <%= rental.boat.description %></p>
-        <p><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
-        <%= link_to 'Details', rental_path(rental) %>
-      </li>
-    <% end %>
-  </ul>
-    <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
-<% end %>
+  <div class="container mt-5">
+    <h1>Rental History</h1>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <% past_rentals.each do |rental| %>
+        <div class="col">
+          <div class="card h-100">
+            <% if rental.boat.photos.attached? %>
+              <%= cl_image_tag rental.boat.photos.first.key, height: 200, width: 300, crop: :fill, class: "card-img-top img-fluid" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= rental.boat.name %></h5>
+              <p class="card-text"><strong>Price:</strong> <%= rental.boat.price %></p>
+              <p class="card-text"><strong>Description:</strong> <%= rental.boat.description %></p>
+              <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success mt-3' %>
+  </div>
 <% else %>
-  <p>No boats booked...yet!</p>
+  <div class="container mt-5">
+    <p>No boats booked...yet!</p>
     <%= link_to 'Find the perfect Boat for you!', root_path, class: 'btn btn-outline-success' %>
+  </div>
 <% end %>
