@@ -7,8 +7,8 @@
 <% @boats.each do |boat| %>
   <div class="boat">
     <h3><%= boat.name %></h3>
-    <% @boat.photo.each do |photo| %>
-      <%= cl_image_tag @boat.photo.key, height: 300, width: 400, crop: :fill %>
+    <% boat.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
     <% end %>
     <p>Description: <%= boat.description %></p>
     <p>Price per hour: <%= number_to_currency(boat.price) %></p>
