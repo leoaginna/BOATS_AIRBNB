@@ -2,20 +2,31 @@
 
 <h1>Welcome to Boat Rentals!</h1>
 
-
 <h2>Available Boats</h2>
-<% @boats.each do |boat| %>
-  <div class="boat">
-    <h3><%= boat.name %></h3>
-    <% boat.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-4 g-3">
+    <% @boats.each do |boat| %>
+      <div class="col">
+        <div class="boat">
+          <div class="card rounded-4 shadow" style="width: 18rem;">
+            <% boat.photos.each do |photo| %>
+              <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= boat.name %></h5><h3><%= number_to_currency(boat.price) %></h3>
+              <p class="card-text" style="height: 80px;"><%= boat.description %>.</p>
+              <% if user_signed_in? %>
+                <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-primary" %>
+              <% else %>
+                <%= link_to "Sign in to rent this boat", new_user_session_path, class: "btn btn-primary" %>
+              <% end %>
+              <%# <a href="#" class="btn btn-primary">Go somewhere</a> %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-    <p>Description: <%= boat.description %></p>
-    <p>Price per hour: <%= number_to_currency(boat.price) %></p>
-    <% if user_signed_in? %>
-      <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-primary" %>
-    <% else %>
-      <%= link_to "Sign in to rent this boat", new_user_session_path, class: "btn btn-primary" %>
-    <% end %>
+
   </div>
-<% end %>
+</div>

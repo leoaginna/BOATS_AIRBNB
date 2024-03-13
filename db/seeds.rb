@@ -15,7 +15,8 @@ puts 'Creating a boat...'
     price: Faker::Number.decimal(l_digits: 2),
     available: Faker::Boolean.boolean,
     address: Faker::Address.full_address,
-    user_id: 1
+    user_id: 1,
+    # image: Faker::LoremFlickr.image
   )
   boat.save!
 end
