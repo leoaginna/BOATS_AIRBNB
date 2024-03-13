@@ -34,7 +34,7 @@ class BoatsController < ApplicationController
 
   def update
     @boat = Boat.find params[:id]
-    if @boat.update boat_params
+    if @boat.update(boat_params[:photos] == [""] ? boat_params.except(:photos) : boat_params)
       redirect_to myboats_path, status: :see_other
     else
       render :edit, status: :unprocessable_entity
