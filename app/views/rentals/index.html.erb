@@ -6,14 +6,14 @@
     <% @my_rentals.each do |rental| %>
       <li>
         <strong><%= rental.boat.name %></strong>
-        <% if rental.image.attached? %>
-          <% image_tag rental.image.variant(resize: "100x100") %>
+        <% if rental.boat.image.attached? %>
+          <% image_tag rental.boat.image.variant(resize: "100x100") %>
         <% end %>
         <p><strong>Price:</strong> <%= rental.boat.price %></p>
         <p><strong>Description:</strong> <%= rental.boat.description %></p>
         <p><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
         <%= link_to 'Cancel rental', rentals_path, turbo_method: :delete, data: { confirm: '¿Estás seguro que quieres cancelar este alquiler?' } %>
-        <%= link_to 'Edit rental', boat_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
       </li>
     <% end %>
   </ul>
