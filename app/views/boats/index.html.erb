@@ -16,11 +16,7 @@
             <div class="card-body">
               <h5 class="card-title"><%= boat.name %></h5><h3><%= number_to_currency(boat.price) %></h3>
               <p class="card-text" style="height: 80px;"><%= boat.description %>.</p>
-              <% if user_signed_in? %>
-                <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-primary" %>
-              <% else %>
-                <%= link_to "Sign in to rent this boat", new_user_session_path, class: "btn btn-primary" %>
-              <% end %>
+              <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-primary" %>
               <%# <a href="#" class="btn btn-primary">Go somewhere</a> %>
             </div>
           </div>
