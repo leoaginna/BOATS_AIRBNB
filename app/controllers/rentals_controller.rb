@@ -6,9 +6,16 @@ class RentalsController < ApplicationController
   end
 
   def create
+    @boat = Boat.find params[:boat_id]
     @rental = Rental.new rental_params
     @rental.user = current_user
     @rental.boat = @boat
+    raise
+    if @rental.save
+      redirect_to rentals_path, status: :see_other
+    else
+      render "boats/show"
+    end
   end
   # not to be used until everywthing else is working -simon
   # def create_review
