@@ -26,7 +26,7 @@
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Action", "#", class: "dropdown-item" %>
               <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
+              <%= link_to "Log out", "users/sign_out", class: "dropdown-item", data: {turbo_method: :delete} %>
             </div>
           </li>
         <%# else %>
@@ -35,9 +35,9 @@
           <!--/li-->
         <%# end %>
       </ul>
-       <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+       <form class="form-inline d-flex justify-content-center">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
        </form>
     </div>
   </div>
