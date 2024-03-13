@@ -22,7 +22,7 @@ class BoatsController < ApplicationController
     @boat = Boat.new boat_params
     @boat.user = current_user
     if @boat.save
-      redirect_to @boat, status: :see_other
+      redirect_to :myboats, status: :see_other
     else
       render :new, status: :unprocessable_entity
     end

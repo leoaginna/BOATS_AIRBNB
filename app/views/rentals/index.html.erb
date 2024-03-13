@@ -7,7 +7,7 @@
       <li>
         <strong><%= rental.boat.name %></strong>
         <% if rental.boat.photos.attached? %>
-          <% image_tag rental.boat.photos.first.variant(resize: "100x100") %>
+          <%= cl_image_tag rental.boat.photos.first.key, height: 300, width: 400, crop: :fill %>
         <% end %>
         <p><strong>Price:</strong> <%= rental.boat.price %></p>
         <p><strong>Description:</strong> <%= rental.boat.description %></p>
@@ -32,7 +32,7 @@
       <li>
         <strong><%= rental.boat.name %></strong>
         <% if rental.boat.photos.attached? %>
-          <% image_tag rental.boat.photos.first.variant(resize: "100x100") %>
+          <%= cl_image_tag rental.boat.photos.first.key, height: 300, width: 400, crop: :fill %>
         <% end %>
         <p><strong>Price:</strong> <%= rental.boat.price %></p>
         <p><strong>Description:</strong> <%= rental.boat.description %></p>
