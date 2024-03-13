@@ -41,10 +41,10 @@ class BoatsController < ApplicationController
     end
   end
 
-  def delete
-    @boat = Boat.find params[:id]
+  def delete_my_boat
+    @boat = current_user.boats.find params[:id]
     @boat.destroy
-    redirect_to boats_path, status: :see_other
+    redirect_to myboats_path, status: :see_other
   end
 
 
