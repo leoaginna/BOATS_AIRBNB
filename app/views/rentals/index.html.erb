@@ -12,7 +12,7 @@
         <p><strong>Price:</strong> <%= rental.boat.price %></p>
         <p><strong>Description:</strong> <%= rental.boat.description %></p>
         <p><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
-        <%= link_to 'Cancel rental', rentals_path, turbo_method: :delete, data: { confirm: '¿Estás seguro que quieres cancelar este alquiler?' } %>
+        <%= link_to 'Cancel rental', rentals_path, turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
         <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
       </li>
     <% end %>
