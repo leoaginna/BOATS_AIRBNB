@@ -6,6 +6,7 @@
 <h2>Available Boats</h2>
 <% @boats.each do |boat| %>
   <div class="boat">
+    <%= cl_image_tag(boat.photo.key, width: 400, height: 300, crop: :fill) %>
     <h3><%= boat.name %></h3>
     <p>Description: <%= boat.description %></p>
     <p>Price per hour: <%= number_to_currency(boat.price) %></p>
