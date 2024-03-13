@@ -1,6 +1,9 @@
 <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
 
 <h1><%= @boat.name %></h1>
+<% @boat.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
 <p><%= @boat.description %></p>
 <p><%= @boat.price %></p>
 <p><%= @boat.address %></p>

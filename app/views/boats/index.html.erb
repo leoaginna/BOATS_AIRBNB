@@ -10,7 +10,9 @@
       <div class="col">
         <div class="boat">
           <div class="card rounded-4 shadow" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <% boat.photos.each do |photo| %>
+              <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+            <% end %>
             <div class="card-body">
               <h5 class="card-title"><%= boat.name %></h5><h3><%= number_to_currency(boat.price) %></h3>
               <p class="card-text" style="height: 80px;"><%= boat.description %>.</p>
