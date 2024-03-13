@@ -18,11 +18,12 @@
     <% end %>
   </ul>
 
-  <h1>Rental History</h1>
+
 
 <% past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today } %>
 
 <% if past_rentals.present? %>
+<h1>Rental History</h1>
   <ul>
     <% past_rentals.each do |rental| %>
       <li>
