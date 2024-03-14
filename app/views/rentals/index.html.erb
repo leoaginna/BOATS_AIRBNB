@@ -9,6 +9,7 @@
   <% if @current_rentals.present? %>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @current_rentals.each do |rental| %>
+      <% day_booked =  rental.end_time - rental.start_time %>
         <div class="col mb-3">
           <div class="card h-100 shadow-sm rounded">
             <p class='text-end p-2'><strong>Booking number:</strong> <%= rental.id %></p>
@@ -18,7 +19,8 @@
               <% end %>
               <div class='flex-grow-1 mx-5'>
                 <h5 class="card-title"><%= rental.boat.name %></h5>
-                <p class="card-text"><strong>Price:</strong> <%= rental.boat.price %></p>
+                <p class="card-text"><strong>Price per day: </strong>$ <%= rental.boat.price %></p>
+                <p class="card-text"><strong>Total:</strong> $ <%= rental.boat.price * (day_booked == 0 ? 1 : day_booked) %></p>
                 <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
               </div>
             </div>
@@ -38,6 +40,7 @@
     <h1>Rental History</h1>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @past_rentals.each do |rental| %>
+        <% day_booked =  rental.end_time - rental.start_time %>
         <div class="col mb-3">
           <div class="card h-100 shadow-sm rounded">
             <p class='text-end p-2'><strong>Booking number:</strong> <%= rental.id %></p>
@@ -47,7 +50,8 @@
               <% end %>
               <div class='flex-grow-1 mx-5'>
                 <h5 class="card-title"><%= rental.boat.name %></h5>
-                <p class="card-text"><strong>Price:</strong> <%= rental.boat.price %></p>
+                <p class="card-text"><strong>Price per day: </strong>$ <%= rental.boat.price %></p>
+                <p class="card-text"><strong>Total: </strong>$ <%= rental.boat.price * (day_booked == 0 ? 1 : day_booked) %></p>
                 <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
               </div>
             </div>
