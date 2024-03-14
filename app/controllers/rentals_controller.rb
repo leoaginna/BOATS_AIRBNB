@@ -1,7 +1,7 @@
 class RentalsController < ApplicationController
   def index
-    @my_rentals = Rental.where("user_id = ? AND state != ?", current_user.id, 'cancelled')
-    @past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today || rental.state == 'cancelled'}
+    @my_rentals = Rental.where(user_id: current_user.id)
+    @past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today }
     @current_rentals = @my_rentals.select { |rental| rental.end_time >= Date.today }
   end
 
@@ -10,7 +10,6 @@ class RentalsController < ApplicationController
     @rental = Rental.new rental_params
     @rental.user = current_user
     @rental.boat = @boat
-    @rental.state= 'accepted'
     if @rental.start_time.present? && @rental.end_time.present?
       if @rental.start_time > @rental.end_time
         redirect_to boat_path(@boat), status: :see_other, alert: "Start time can't be after End time"
@@ -52,8 +51,7 @@ class RentalsController < ApplicationController
 
   def cancel
     @rental = Rental.find params[:id]
-    @rental.update state: 'cancelled'
-    redirect_to rentals_path
+    @rental.available = false
   end
 
   private

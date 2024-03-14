@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <%= button_to 'Cancel rental', cancel_rental_path(rental), method: :patch, class: "btn btn-danger btn-sm text-white me-2", data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Cancel rental', rentals_path, class: "btn btn-danger btn-sm text-white me-2", turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
               <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
             </div>
           </div>
