@@ -1,8 +1,8 @@
 class RentalsController < ApplicationController
   def index
-    @rentalss = Rental.all
     @my_rentals = Rental.where(user_id: current_user.id)
     @past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today }
+    @current_rentals = @my_rentals.select { |rental| rental.end_time >= Date.today }
   end
 
   def create
@@ -10,12 +10,21 @@ class RentalsController < ApplicationController
     @rental = Rental.new rental_params
     @rental.user = current_user
     @rental.boat = @boat
-    if @rental.save
-      redirect_to rentals_path, status: :see_other
+    if @rental.start_time > @rental.end_time
+      redirect_to boat_path(@boat), status: :see_other, alert: "Start time can't be after End time"
     else
-      render "boats/show"
+      if @rental.start_time < Date.today || @rental.end_time < Date.today
+        redirect_to boat_path(@boat), status: :see_other, alert: "You can't book a boat in the past"
+      else
+        if @rental.save
+          redirect_to rentals_path, status: :see_other
+        else
+          render "boats/show"
+        end
+      end
     end
   end
+
   # not to be used until everywthing else is working -simon
   # def create_review
   #   @rental = Rental.find params[:id]
