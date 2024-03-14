@@ -1,48 +1,10 @@
 
 
-<h1>Welcome to Boat Rentals!</h1>
-
+<h1><strong>KOOLBOATS</strong></h1>
+<%= render "banner" %>
 <h2>Available Boats</h2>
 
-<div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-    <% @boats.each do |boat| %>
-      <div class="col">
-        <div class="boat">
-          <div class="card rounded-4 shadow" style="width: 100%;">
-              <div id="carousel<%= boat.id %>" class="carousel slide rounded-top-4" data-bs-ride="carousel">
-                <div class="carousel-inner rounded-top-4">
-                  <% boat.photos.each_with_index do |photo, index| %>
-                    <div class="carousel-item <%= 'active' if index == 0 %>">
-                      <%= cl_image_tag photo.key, class: "d-block w-100" %>
-                    </div>
-                  <% end %>
-                </div>
-                <a class="carousel-control-prev" href="#carousel<%= boat.id %>" role="button" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carousel<%= boat.id %>" role="button" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </a>
-              </div>
-            <div class="card-body">
-              <h5 class="card-title"><%= boat.name %></h5>
-              <h3><%= number_to_currency(boat.price) %></h3>
-              <p class="card-text" style="height: 80px;"><%= boat.description %>.</p>
-              <% if boat.user == current_user%>
-                <%= link_to "check your boat", myboats_path, class: "btn btn-success" %>
-              <% else %>
-                <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-primary" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render "card", boats: @boats %>
 
 <p style="color: green"><%= notice %></p>
 
@@ -52,4 +14,5 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
 
