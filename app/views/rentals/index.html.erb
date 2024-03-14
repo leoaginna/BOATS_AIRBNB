@@ -9,7 +9,6 @@
   <% if @current_rentals.present? %>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @current_rentals.each do |rental| %>
-      <%= rental.state %>
       <% day_booked =  rental.end_time - rental.start_time %>
         <div class="col mb-3">
           <div class="card h-100 shadow-sm rounded">
