@@ -16,13 +16,18 @@
 </div>
 
 <% if current_user == @boat.user %>
-  <%= link_to 'Edit', edit_boat_path(@boat), class: "btn btn-outline-info btn-sm" %>
-  <%= form_for @boat, url: suspend_boat_path(@boat), method: :patch, class: "d-inline" do |f| %>
-  <%= f.button type: "submit", class: "btn btn-outline-warning btn-sm", data: { confirm: "Are you sure you want to suspend this boat?" } do %>
-    Suspend
-  <% end %>
-<% end %>
-  <%= link_to "Delete", delete_my_boat_path(@boat), class: "btn btn-outline-danger btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <%if @boat.available == false  %>
+    <p class='text-danger'><strong>Suspended, not available in the platform</strong></p>
+    <% end %>
+    <div class='d-flex'>
+    <%= link_to 'Edit', edit_boat_path(@boat), class: "btn btn-outline-info btn-sm" %>
+    <%= form_for @boat, url: suspend_boat_path(@boat), method: :patch, class: "d-inline" do |f| %>
+    <%= f.button type: "submit", class: "btn btn-outline-warning btn-sm", data: { confirm: "Are you sure you want to suspend this boat?" } do %>
+      Suspend/reactivate
+    <% end %>
+    <%= link_to "Delete", delete_my_boat_path(@boat), class: "btn btn-outline-danger btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
 <% else %>
   <%= simple_form_for @rental, html: { class: 'my-3' } do |f| %>
     <div class="form-row">
