@@ -53,6 +53,9 @@
                 <p class="card-text"><strong>Price per day: </strong>$ <%= rental.boat.price %></p>
                 <p class="card-text"><strong>Total: </strong>$ <%= rental.boat.price * (day_booked == 0 ? 1 : day_booked) %></p>
                 <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
+                <% if rental.state = 'canceled' %>
+                  <p class="card-text text-danger"><strong>Canceled</strong></p>
+                <% end %>
               </div>
             </div>
           </div>
