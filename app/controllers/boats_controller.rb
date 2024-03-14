@@ -1,8 +1,9 @@
 class BoatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
+  before_action :set_boat, only: %i[ show edit update suspend delete_my_boat]
 
   def index
-    @boats = Boat.all
+    @boats = Boat.where(available: true)
     @markers = @boats.geocoded.map do |boat|
       {
         lat: boat.latitude,
@@ -19,7 +20,6 @@ class BoatsController < ApplicationController
 
   def show
     @rental = Rental.new
-    @boat = Boat.find params[:id]
   end
 
   def new
@@ -37,11 +37,9 @@ class BoatsController < ApplicationController
   end
 
   def edit
-    @boat = Boat.find params[:id]
   end
 
   def update
-    @boat = Boat.find params[:id]
     if @boat.update(boat_params[:photos] == [""] ? boat_params.except(:photos) : boat_params)
       redirect_to myboats_path, status: :see_other
     else
@@ -49,8 +47,17 @@ class BoatsController < ApplicationController
     end
   end
 
+  def suspend
+    if @boat.available == true || @boat.available.nil?
+      @boat.update available: false
+      redirect_to :myboats, status: :see_other
+    else
+      @boat.update available: true
+      redirect_to :myboats, status: :see_other
+    end
+  end
+
   def delete_my_boat
-    @boat = Boat.find(params[:id])
     if @boat.rentals.empty?
       @boat.destroy
       redirect_to myboats_path, status: :see_other, notice: "Boat successfully deleted."
@@ -64,5 +71,9 @@ class BoatsController < ApplicationController
 
   def boat_params
     params.require(:boat).permit(:name, :description, :price, :address, :available, :available_from, :available_until, photos: [])
+  end
+
+  def set_boat
+    @boat = Boat.find(params[:id])
   end
 end
