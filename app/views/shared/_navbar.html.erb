@@ -9,7 +9,9 @@
 
     <%= simple_form_for :search, method: :get, html: { class: "form-inline d-flex justify-content-left" } do |f| %>
       <%= f.input :search, label: false, placeholder: "Search", input_html: { class: "form-control mr-sm-2" } %>
-      <%= f.button :submit, "Search", class: "btn btn-outline-success my-2 my-sm-0" %>
+      <%= button_tag(type: 'submit', class: "btn btn-outline-success my-2 my-sm-0") do %>
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
