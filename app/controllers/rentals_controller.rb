@@ -10,18 +10,22 @@ class RentalsController < ApplicationController
     @rental = Rental.new rental_params
     @rental.user = current_user
     @rental.boat = @boat
-    if @rental.start_time > @rental.end_time
-      redirect_to boat_path(@boat), status: :see_other, alert: "Start time can't be after End time"
-    else
-      if @rental.start_time < Date.today || @rental.end_time < Date.today
-        redirect_to boat_path(@boat), status: :see_other, alert: "You can't book a boat in the past"
+    if @rental.start_time.present? && @rental.end_time.present?
+      if @rental.start_time > @rental.end_time
+        redirect_to boat_path(@boat), status: :see_other, alert: "Start time can't be after End time"
       else
-        if @rental.save
-          redirect_to rentals_path, status: :see_other
+        if @rental.start_time < Date.today || @rental.end_time < Date.today
+          redirect_to boat_path(@boat), status: :see_other, alert: "You can't book a boat in the past"
         else
-          render "boats/show"
+          if @rental.save
+            redirect_to rentals_path, status: :see_other
+          else
+            render "boats/show"
+          end
         end
       end
+    else
+      redirect_to boat_path(@boat), status: :see_other, alert: "You need a Start and End time to book a boat"
     end
   end
 
