@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "3.1.2"
 gem "faker"
 gem "devise"
+gem "geocoder"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -20,7 +21,11 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+
+# gem "importmap-rails" Mapbox's JavaScript IS NOT WORKING WELL AT THE MOMENT;
+# SO I REPLACE THIS GEM WITH THE NEXT ONE:
+
+gem 'importmap-rails', '~> 2.0'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"

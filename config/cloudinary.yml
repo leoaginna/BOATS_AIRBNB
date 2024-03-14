@@ -1,0 +1,11 @@
+development: 
+  cloud_name: "dkmuelkq8"
+  api_key: "473721525268781"
+  api_secret: "NVhjkuBebhrrz1TpUwB450owPa8"
+  secure: true
+
+production:
+  cloud_name: "dkmuelkq8"
+  api_key: "473721525268781"
+  api_secret: "NVhjkuBebhrrz1TpUwB450owPa8"
+  secure: true
