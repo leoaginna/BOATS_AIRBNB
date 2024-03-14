@@ -1,8 +1,8 @@
 class RentalsController < ApplicationController
   def index
-    @my_rentals = Rental.where("user_id = ? AND state != ?", current_user.id, 'cancelled')
+    @my_rentals = Rental.where("user_id = ?")
     @past_rentals = @my_rentals.select { |rental| rental.end_time < Date.today || rental.state == 'cancelled'}
-    @current_rentals = @my_rentals.select { |rental| rental.end_time >= Date.today }
+    @current_rentals = @my_rentals.select { |rental| rental.end_time >= Date.today && rental.state != 'cancelled'}
   end
 
   def create
