@@ -9,6 +9,7 @@
   <% if @current_rentals.present? %>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @current_rentals.each do |rental| %>
+      <%= rental.state %>
       <% day_booked =  rental.end_time - rental.start_time %>
         <div class="col mb-3">
           <div class="card h-100 shadow-sm rounded">
@@ -25,7 +26,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <%= link_to 'Cancel rental', rentals_path, class: "btn btn-danger btn-sm text-white me-2", turbo_method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= button_to 'Cancel rental', cancel_rental_path(rental), method: :patch, class: "btn btn-danger btn-sm text-white me-2", data: { confirm: 'Are you sure?' } %>
               <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
             </div>
           </div>
