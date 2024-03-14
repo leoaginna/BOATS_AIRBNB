@@ -140,6 +140,7 @@ GEM
     font_awesome_rails (0.0.4)
       activesupport (>= 3.1.0)
       sass (>= 3.2.0)
+    geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
@@ -337,7 +338,8 @@ DEPENDENCIES
   faker
   font-awesome-sass (~> 6.1)
   font_awesome_rails
-  importmap-rails
+  geocoder
+  importmap-rails (~> 2.0)
   jbuilder
   pg (~> 1.1)
   puma (>= 5.0)
