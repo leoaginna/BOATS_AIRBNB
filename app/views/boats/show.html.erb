@@ -1,17 +1,26 @@
-<%= link_to 'Back to home', root_path, class: 'btn btn-outline-success' %>
+<%= link_to 'Back to home', root_path, class: 'btn btn-outline-success my-3' %>
 
-<h1><%= @boat.name %></h1>
-<% @boat.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
-<p><%= @boat.description %></p>
-<p><%= @boat.price %></p>
-<p><%= @boat.address %></p>
+<div class="row my-3">
+  <div class="col-md-12">
+    <h1><%= @boat.name %></h1>
+    <% @boat.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'img-fluid rounded' %>
+    <% end %>
+    <p><strong>Description: </strong><%= @boat.description %></p>
+    <p><strong>Price: </strong><%= @boat.price %></p>
+    <p><strong>Address: </strong><%= @boat.address %></p>
+  </div>
+</div>
 
-
-<%= simple_form_for @rental do |f| %>
-  <%= f.input :start_time %>
-  <%= f.input :end_time %>
+<%= simple_form_for @rental, html: { class: 'my-3' } do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.input :start_time, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.input :end_time, class: 'form-control' %>
+    </div>
+  </div>
   <%= f.hidden_field :boat_id, value: @boat.id %>
   <%= f.button :submit, 'Book', class: 'btn btn-primary' %>
 <% end %>
