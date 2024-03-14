@@ -15,12 +15,20 @@
 <%= simple_form_for @rental, html: { class: 'my-3' } do |f| %>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <%= f.input :start_time, class: 'form-control' %>
+      <%= f.input :start_time,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
     </div>
     <div class="form-group col-md-6">
-      <%= f.input :end_time, class: 'form-control' %>
+      <%= f.input :end_time,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
     </div>
   </div>
   <%= f.hidden_field :boat_id, value: @boat.id %>
-  <%= f.button :submit, 'Book', class: 'btn btn-primary' %>
+  <% if current_user == @boat.user %>
+    <%= link_to 'Back to my boats', myboats_path, class: 'btn btn-outline-success' %>
+  <% else %>
+    <%= f.button :submit, 'Book', class: 'btn btn-primary' %>
+  <% end %>
 <% end %>
