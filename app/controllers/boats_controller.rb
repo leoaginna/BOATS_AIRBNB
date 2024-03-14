@@ -3,7 +3,7 @@ class BoatsController < ApplicationController
   before_action :set_boat, only: %i[ show edit update suspend delete_my_boat]
 
   def index
-    @boats = Boat.all
+    @boats = Boat.where(available: true)
     @markers = @boats.geocoded.map do |boat|
       {
         lat: boat.latitude,
