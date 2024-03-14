@@ -1,35 +1,39 @@
 <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success my-3' %>
 <h1>My Boats</h1>
 
-  <% if @my_boats.present? %>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-      <% @my_boats.each do |boat| %>
-        <div class="col mb-4">
-          <div class="card">
-            <div class="card-body">
+<% if @my_boats.present? %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <% @my_boats.each do |boat| %>
+      <div class="col mb-4">
+        <%= link_to boat_path(boat), class: 'text-decoration-none' do %>
+        <div class="card bg-light">
+          <div class="card-body boat-card">
+            <div class="row">
+              <% boat.photos.each do |photo| %>
+                <div class="col">
+                  <%= cl_image_tag photo.key, height: 200, width: 400, crop: :fill, class: "img-fluid" %>
+                </div>
+              <% end %>
+            </div>
+            <div class='border p-2'>
               <h5 class="card-title"><%= boat.name %></h5>
-              <div class="row">
-                <% boat.photos.each do |photo| %>
-                  <div class="col">
-                    <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: "img-fluid" %>
-                  </div>
-                <% end %>
-              </div>
               <p class="card-text"><strong>Price:</strong> <%= boat.price %></p>
               <p class="card-text"><strong>Description:</strong> <%= boat.description %></p>
               <div class="d-flex justify-content-between">
-                  <%= link_to 'Edit', edit_boat_path(boat), class: "btn btn-outline-info btn-sm" %>
-                  <%= link_to 'Suspend', boat_path(boat), method: :patch, params: { boat: { available: false } }, class: "btn btn-outline-warning btn-sm" %>
-                  <%= link_to "Delete", delete_my_boat_path(boat), class: "btn btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                <%= link_to 'Edit', edit_boat_path(boat), class: "btn btn-outline-info btn-sm" %>
+                <%= link_to 'Suspend', boat_path(boat), method: :patch, params: { boat: { available: false } }, class: "btn btn-outline-warning btn-sm" %>
+                <%= link_to "Delete", delete_my_boat_path(boat), class: "btn btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
               </div>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
-    <%= link_to "Add a new Boat", new_boat_path, class: 'btn btn-outline-primary' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "Add a new Boat", new_boat_path, class: 'btn btn-outline-primary' %>
 
-  <% else %>
-    <p class="mt-5">You have no boats</p>
-    <%= link_to "Add your first Boat!", new_boat_path, class: 'btn btn-outline-primary' %>
-  <% end %>
+<% else %>
+  <p class="mt-5">You have no boats</p>
+  <%= link_to "Add your first Boat!", new_boat_path, class: 'btn btn-outline-primary' %>
+<% end %>
