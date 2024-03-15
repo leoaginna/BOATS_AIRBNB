@@ -6,7 +6,7 @@
     <div class="col-md-8">
       <%= render "card", boats: @boats %>
     </div>
-    <div class="col-md-4 px-0">
+    <div class="col-md-4 px-0 rounded-5 shadow mt-3">
       <div class="map" style="width: 100%; height: 600px;"
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"

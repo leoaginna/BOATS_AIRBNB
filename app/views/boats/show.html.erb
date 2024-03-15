@@ -1,35 +1,45 @@
 <div class="container">
   <div class='d-flex justify-content-between'>
-    <%= link_to 'Home', root_path, class: 'btn btn-success my-3' %>
-    <%= link_to 'Back to my boats', myboats_path, class: 'btn btn-primary my-3' if current_user == @boat.user%>
+    <%= link_to 'Home', root_path, class: 'btn btn-book my-3' %>
+    <%= link_to 'Back to my boats', myboats_path, class: 'btn btn-info my-3' if current_user == @boat.user %>
   </div>
-
-  <div class="row my-3">
-    <div class="col-md-12">
-      <h1><%= @boat.name %></h1>
-      <% @boat.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'img-fluid rounded mb-2' %>
-      <% end %>
-      <p><strong>Description: </strong><%= @boat.description %></p>
-      <p><strong>Price: </strong><%= @boat.price %></p>
-      <p><strong>Address: </strong><%= @boat.address %></p>
+  <div class="d-flex align-items-center gap-5 shadow-">
+    <div class="boat_info row my-3">
+      <div class="col-md-12">
+        <h1><%= @boat.name %></h1>
+        <% @boat.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'img-fluid rounded mb-2' %>
+        <% end %>
+        <p><strong>Description: </strong><%= @boat.description %></p>
+        <p><strong>Price: </strong><%= @boat.price %></p>
+        <p><strong>Address: </strong><%= @boat.address %></p>
+      </div>
     </div>
-  </div>
-
-  <% if current_user == @boat.user %>
-      <%if @boat.available == false  %>
-      <p class='text-danger'><strong>Suspended, not available in the platform</strong></p>
-      <% end %>
-      <div class='d-flex'>
+    <div class="rent_info">
+      <% if current_user == @boat.user %>
+        <% if @boat.available == false %>
+          <p class='text-danger'><strong>Suspended, not available in the platform</strong></p>
+        <% end %>
+        <% if @boat.rentals.present? %>
+          <% @boat.rentals.each do |rental| %>
+            <strong>Rented by:</strong> <%= rental.user.email %> <br>
+            <p>From <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
+          <% end %>
+        <% else %>
+          <p>No reservations currently</p>
+        <% end %>
+      </div>
+    </div>
+    <div class='d-flex'>
       <%= link_to 'Edit', edit_boat_path(@boat), class: "btn btn-outline-info btn-sm" %>
       <%= form_for @boat, url: suspend_boat_path(@boat), method: :patch, class: "d-inline" do |f| %>
-      <%= f.button type: "submit", class: "btn btn-outline-warning btn-sm", data: { confirm: "Are you sure you want to suspend this boat?" } do %>
-        Suspend/reactivate
-      <% end %>
-      <%= link_to "Delete", delete_my_boat_path(@boat), class: "btn btn-outline-danger btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <%= f.button type: "submit", class: "btn btn-outline-warning btn-sm mx-2", data: { confirm: "Are you sure you want to suspend this boat?" } do %>
+          Suspend/reactivate
+        <% end %>
+        <%= link_to "Delete", delete_my_boat_path(@boat), class: "btn btn-outline-danger btn-sm", id: "delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       <% end %>
     </div>
   <% else %>
-      <%= render "rental-form", rental: @rental %>
+    <%= render "rental-form", rental: @rental %>
   <% end %>
 </div>

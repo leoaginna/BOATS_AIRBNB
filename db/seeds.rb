@@ -2,7 +2,7 @@ require 'faker'
 require 'cloudinary'
 require 'open-uri'
 
-100.times do
+10.times do
   p "creating 1 stuff..."
   user = User.new(
     email: Faker::Internet.email,
