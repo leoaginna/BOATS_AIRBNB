@@ -28,6 +28,7 @@ class BoatsController < ApplicationController
 
   def create
     @boat = Boat.new boat_params
+    @boat.available = true
     @boat.user = current_user
     if @boat.save
       redirect_to :myboats, status: :see_other
@@ -70,7 +71,7 @@ class BoatsController < ApplicationController
   private
 
   def boat_params
-    params.require(:boat).permit(:name, :description, :price, :address, :available, :available_from, :available_until, photos: [])
+    params.require(:boat).permit(:name, :description, :price, :address, :available_from, :available_until, photos: [])
   end
 
   def set_boat
