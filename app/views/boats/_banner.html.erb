@@ -5,8 +5,7 @@
       <p>Unlock the waves with ease. <br> Rent a boat or list yours to earn <br>with our seamless boat rental platform.</p>
       <%= link_to "List your boat!", new_boat_path, class: "btn btn-book rounded" %>
     </div>
-      <div class='m-5 p-3 text-start' data-wheather-api-target='weather'>
-
+      <div class='m-5 p-3 text-start' data-wheather-api-target='weather' data-weather-api-key-value="<%= ENV['WEATHER_API'] %>">
       </div>
     </div>
 </div>

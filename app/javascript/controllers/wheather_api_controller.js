@@ -1,6 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+
+  static values = {
+    key: String,
+  }
   static targets = ["weather"]
 
   connect() {
@@ -8,7 +12,7 @@ export default class extends Controller {
       navigator.geolocation.getCurrentPosition(position => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        const apiKey = '1d90227e62a200f2482c263a608f79e6'; // Replace with your API key
+        const apiKey = WEATHER_API_KEY;
 
         const urlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 
@@ -16,7 +20,6 @@ export default class extends Controller {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            // TODO: Insert the weather info in the DOM (description, date, temperature...)
             this.weatherTarget.innerHTML = `
               <p class=''> ${data.name} <br>
               temp: ${data.main.temp} degrees</p>
