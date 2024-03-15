@@ -8,8 +8,11 @@ gem "geocoder"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
-#cloudinary
+# Cloudinary
 gem "cloudinary"
+
+# PG SEARCH = for the search bar
+gem "pg_search"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
