@@ -40,13 +40,16 @@ class RentalsController < ApplicationController
   #     render rental_path
   #   end
   # end
+  def edit
+    @current_rental = Rental.find(params[:id])
+  end
 
   def update
-    @rental = Rental.find params[:id]
-    if @rental.update(rental_params)
-      redirect_to @rental, status: :see_others
+    @current_rental = Rental.find(params[:id])
+    if @current_rental.update(rental_params)
+      redirect_to rentals_path
     else
-      render rental_path
+      render 'boats/show'
     end
   end
 

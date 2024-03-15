@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       patch :suspend
     end
   end
-  resources :rentals, only: [:index,:create, :update] do
+  resources :rentals, only: [:index,:create, :edit, :update] do
     member do
       patch :cancel
     end
