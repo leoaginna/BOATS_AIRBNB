@@ -3,13 +3,10 @@ class BoatsController < ApplicationController
   before_action :set_boat, only: %i[ show edit update suspend delete_my_boat]
 
   def index
-    @boats = Boat.where(available: true)
-
     if params[:query].present?
-      sql_subquery = <<~SQL
-        boats.address @@ :query
-      SQL
-      @boats = @boats.where(sql_subquery, query: params[:query])
+      @boats = Boat.available.search_by_address(params[:query])
+    else
+      @boats = Boat.where(available: true)
     end
 
     @markers = @boats.geocoded.map do |boat|

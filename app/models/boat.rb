@@ -11,6 +11,8 @@ class Boat < ApplicationRecord
   pg_search_scope :search_by_address,
     against: [ :address ],
     using: {
-    tsearch: { prefix: true }
-  }
+      tsearch: { prefix: true }
+
+    }
+    scope :available, -> { where(available: true) }
 end
