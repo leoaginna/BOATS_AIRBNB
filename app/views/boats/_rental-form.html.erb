@@ -11,6 +11,7 @@
             input_html: { data: { controller: "datepicker" } } %>
     </div>
   </div>
+
   <%= f.hidden_field :boat_id, value: @boat.id %>
   <% if f.object.persisted? %>
     <%= f.button :submit, 'Update', class: 'btn btn-info' %>
