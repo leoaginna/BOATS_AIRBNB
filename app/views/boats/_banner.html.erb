@@ -1,8 +1,11 @@
-<div class="banner shadow-lg mt-3" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= asset_path('barco_banner_2.jpg') %>')">
-
-  <div class="mb-5 px-5 ">
-    <h1><strong>KOOLBOATS!</strong></h1>
-    <p>Unlock the waves with ease <br> rent a boat or list yours to earn <br>with our seamless boat rental platform.</p>
-    <%= link_to "Book your boat!", new_boat_path, class: "btn btn-book rounded" %>
-  </div>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= asset_path('barco_banner_2.jpg') %>')">
+  <div class="d-flex justify-content-between ">
+    <div class="mb-5 px-5">
+      <h1><strong>KOOLBOATS!</strong></h1>
+      <p>Unlock the waves with ease. <br> Rent a boat or list yours to earn <br>with our seamless boat rental platform.</p>
+      <%= link_to "List your boat!", new_boat_path, class: "btn btn-book rounded" %>
+    </div>
+      <div class='m-5 p-3 text-start' data-wheather-api-target='weather' data-weather-api-key-value="<%= ENV['WEATHER_API'] %>">
+      </div>
+    </div>
 </div>

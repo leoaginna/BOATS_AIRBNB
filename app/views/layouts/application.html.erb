@@ -11,8 +11,11 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      <script>
+        const WEATHER_API_KEY = "<%= ENV['WEATHER_API'] %>";
+      </script>
   </head>
-<body>
+<body data-controller='wheather-api'>
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
       <%= yield %>
