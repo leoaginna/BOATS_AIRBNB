@@ -1,18 +1,19 @@
 
 
 <%= render "banner" %>
-<div class="container">
+<div class="container-fluid">
 
-
+  <div class="row overflow-visible">
+    <div class="col-md-8">
+      <%= render "card", boats: @boats %>
+    </div>
+    <div class="col-md-4 px-0">
+      <div class="map" style="width: 100%; height: 600px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+  </div>
 
 </div>
-<%= render "card", boats: @boats %>
-
-<p style="color: green"><%= notice %></p>
-
-<h1>Maps</h1>
-
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
