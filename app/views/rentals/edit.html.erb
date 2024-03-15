@@ -1,0 +1,41 @@
+<% boat = @current_rental.boat %>
+<div class="container mt-3">
+<h1 class="text-center mb-3">Edit Rental</h1> <!-- Center the title -->
+
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8"> <!-- Increase the width of the column -->
+      <div class="card rounded-3 shadow mt-3 text-left"> <!-- Added space after 'shadow' and aligned content to the left -->
+        <div class="card-body px-4"> <!-- Added padding to the card body -->
+          <div class="row my-3"> <!-- Removed justify-content-center to align boat details to the left -->
+            <div class="col-md-8"> <!-- Removed text-center to align boat details content to the left -->
+              <h2><strong><%= boat.name %></strong></h2>
+              <%= cl_image_tag boat.photos.first.key, height: 300, width: 400, crop: :fill, class: 'img-fluid rounded mb-2' %>
+              <p><strong>Description: </strong><%= boat.description %></p>
+              <p><strong>Price: </strong><%= boat.price %></p>
+              <p><strong>Address: </strong><%= boat.address %></p>
+            </div>
+          </div>
+          <%= simple_form_for @current_rental, html: { class: 'my-3' } do |f| %>
+            <div class="form-row"> <!-- Removed justify-content-center to align form inputs to the left -->
+              <div class="form-group col-md-6">
+                <%= f.input :start_time,
+                      as: :string,
+                      input_html: { data: { controller: "datepicker" } } %>
+              </div>
+              <div class="form-group col-md-6">
+                <%= f.input :end_time,
+                      as: :string,
+                      input_html: { data: { controller: "datepicker" } } %>
+              </div>
+            </div>
+            <%= f.hidden_field :boat_id, value: @current_rental.boat %>
+            <div class="text-center"> <!-- Center the button -->
+              <%= f.button :submit, 'Update', class: 'btn btn-info' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
