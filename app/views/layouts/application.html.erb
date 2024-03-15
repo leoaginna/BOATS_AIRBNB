@@ -11,14 +11,10 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   </head>
-
 <body>
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
-    <div class="m-3">
       <%= yield %>
-    </div>
-  </div>
   <%= render 'shared/footer' %>
 </body>
 </html>

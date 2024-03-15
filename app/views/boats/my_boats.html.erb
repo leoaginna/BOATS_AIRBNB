@@ -1,39 +1,41 @@
-<%= link_to 'Back to home', root_path, class: 'btn btn-outline-success my-3' %>
-<h1>My Boats</h1>
+<div class="container ml-5 mt-3">
+  <%= link_to 'Back to home', root_path, class: 'btn btn-outline-success my-3' %>
+  <h1>My Boats</h1>
 
-<% if @my_boats.present? %>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-    <% @my_boats.each do |boat| %>
-      <div class="col mb-4">
-        <%= link_to boat_path(boat), class: 'text-decoration-none' do %>
-        <div class="card bg-light">
-          <div class="card-body boat-card">
-            <div class="row">
-              <% boat.photos.each do |photo| %>
-                <div class="col">
-                  <%= cl_image_tag photo.key, height: 200, width: 400, crop: :fill, class: "img-fluid" %>
-                </div>
-              <% end %>
-            </div>
-            <div class='border p-2'>
-              <h5 class="card-title"><%= boat.name %></h5>
-              <p class="card-text"><strong>Price:</strong> <%= boat.price %></p>
-              <p class="card-text"><strong>Description:</strong> <%= boat.description %></p>
-              <% if boat.available == true %>
-                <p class="card-text text-primary text-end"><strong>Available</strong></p>
-              <% else %>
-                <p class="card-text text-danger text-end"><strong>Suspended</strong></p>
-              <% end %>
+  <% if @my_boats.present? %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      <% @my_boats.each do |boat| %>
+        <div class="col mb-4">
+          <%= link_to boat_path(boat), class: 'text-decoration-none' do %>
+          <div class="card bg-light">
+            <div class="card-body boat-card">
+              <div class="row">
+                <% boat.photos.each do |photo| %>
+                  <div class="col">
+                    <%= cl_image_tag photo.key, height: 200, width: 400, crop: :fill, class: "img-fluid" %>
+                  </div>
+                <% end %>
+              </div>
+              <div class='border p-2'>
+                <h5 class="card-title"><%= boat.name %></h5>
+                <p class="card-text"><strong>Price:</strong> <%= boat.price %></p>
+                <p class="card-text"><strong>Description:</strong> <%= boat.description %></p>
+                <% if boat.available == true %>
+                  <p class="card-text text-primary text-end"><strong>Available</strong></p>
+                <% else %>
+                  <p class="card-text text-danger text-end"><strong>Suspended</strong></p>
+                <% end %>
+              </div>
             </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-  <%= link_to "Add a new Boat", new_boat_path, class: 'btn btn-outline-primary' %>
+      <% end %>
+    </div>
+    <%= link_to "Add a new Boat", new_boat_path, class: 'btn btn-outline-primary' %>
 
-<% else %>
-  <p class="mt-5">You have no boats</p>
-  <%= link_to "Add your first Boat!", new_boat_path, class: 'btn btn-outline-primary' %>
-<% end %>
+  <% else %>
+    <p class="mt-5">You have no boats</p>
+    <%= link_to "Add your first Boat!", new_boat_path, class: 'btn btn-outline-primary' %>
+  <% end %>
+</div>

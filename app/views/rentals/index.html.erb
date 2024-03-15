@@ -24,7 +24,7 @@
                 <p class="card-text"><strong>Reservation Dates:</strong> <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
               </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex">
               <%= button_to 'Cancel rental', cancel_rental_path(rental), method: :patch, class: "btn btn-danger btn-sm text-white me-2", data: { confirm: 'Are you sure?' } %>
               <%= link_to 'Edit rental', boat_path(rental.boat), class: "btn btn-primary btn-sm" %>
             </div>

@@ -7,7 +7,7 @@
   <div class="col-md-12">
     <h1><%= @boat.name %></h1>
     <% @boat.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'img-fluid rounded' %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: 'img-fluid rounded mb-2' %>
     <% end %>
     <p><strong>Description: </strong><%= @boat.description %></p>
     <p><strong>Price: </strong><%= @boat.price %></p>
@@ -43,6 +43,6 @@
       </div>
     </div>
     <%= f.hidden_field :boat_id, value: @boat.id %>
-    <%= f.button :submit, 'Book', class: 'btn btn-primary' %>
+    <%= f.button :submit, 'Book', class: 'btn btn-book' %>
   <% end %>
 <% end %>
