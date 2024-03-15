@@ -1,9 +1,10 @@
 <div class="navbar shadow navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
+  <div class="d-flex justify-content-between px-3 w-100">
+
     <div class="d-flex align-items-center">
       <%= link_to "/", class: "navbar-brand" do %>
         <%= image_tag "barquito.png", class: "" %>
-        <h3 class="ms-3 mb-0 d-inline">KOOLBOATS</h3>
+        <h3 class="ms-3 mt-3 d-none d-md-inline">KOOLBOATS</h3>
       <% end %>
     </div>
 
@@ -11,20 +12,15 @@
         <div class="input-group">
           <input type="text" class="form-control mr-sm-2 rounded" name="search" placeholder="Search" aria-label="Search" required>
           <div class="input-group-append">
-            <button type="submit" class="btn btn-book ms-1" title="Search">
-              <i class="fas fa-search"></i>
+            <button type="submit" class="btn border-0 mt-1" title="Search">
+              <i class="fas fa-search fs-5"></i>
             </button>
           </div>
         </div>
       </form>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-          <li class="nav-item">
+          <li class="nav-item d-none d-md-block">
             <%= link_to "Own a boat? Make $$$", "/boats/new", class: "nav-link" %>
           </li>
 
@@ -34,14 +30,13 @@
               <% if user_signed_in? %>
                 <%= link_to "My rentals", "/rentals", class: "dropdown-item" %>
                 <%= link_to "My boats", "/myboats", class: "dropdown-item" %>
-                <%= link_to "Log out", "users/sign_out", class: "dropdown-item", data: {turbo_method: :delete} %>
+                <%= link_to "Log out", "/users/sign_out", class: "dropdown-item", data: {turbo_method: :delete} %>
               <% else %>
-                <%= link_to "Sign-in", "http://localhost:3000/users/sign_in", class: "dropdown-item" %>
-                <%= link_to "Sign-up", "/users/sign_up", class: "dropdown-item" %>
+                <%= link_to "Log in", "/users/sign_in", class: "dropdown-item" %>
+                <%= link_to "Sign up", "/users/sign_up", class: "dropdown-item" %>
              <% end %>
             </div>
           </li>
       </ul>
-    </div>
   </div>
 </div>
