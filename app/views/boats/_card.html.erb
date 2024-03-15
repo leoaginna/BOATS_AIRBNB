@@ -25,7 +25,14 @@
               <h5 class="card-title"><%= boat.name %></h5>
               <h3><%= number_to_currency(boat.price) %></h3>
               <p class="card-text" style="height: 80px;"><%= boat.description %>.</p>
-              <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-book" %>
+                <% if boat.user == current_user %>
+                  <%= link_to 'Check your boat', boat_path(boat), class: "btn btn-success" %>
+                <% else %>
+                  <%= link_to "Rent this boat", boat_path(boat), class: "btn btn-book" %>
+
+
+                <% end %>
+
             </div>
           </div>
         </div>
