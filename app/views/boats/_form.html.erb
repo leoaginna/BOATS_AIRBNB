@@ -16,5 +16,5 @@
       </div>
     </div>
   <%= f.input :photos, as: :file, input_html: { multiple: true }, label: @boat.photos.empty? ? 'Photos' : "Current: #{@boat.photos.map{ |p| p.filename.to_s }.join(', ')}"  %>
-  <%= f.button :submit, @boat.persisted? ? "Update Boat" : "Create boat" %>
+  <%= f.button :submit, @boat.persisted? ? "Update Boat" : "Add this boat", class: 'btn btn-success' %>
 <% end %>
