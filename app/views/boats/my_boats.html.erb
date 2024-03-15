@@ -19,6 +19,11 @@
               <h5 class="card-title"><%= boat.name %></h5>
               <p class="card-text"><strong>Price:</strong> <%= boat.price %></p>
               <p class="card-text"><strong>Description:</strong> <%= boat.description %></p>
+              <% if boat.available == true %>
+                <p class="card-text text-primary text-end"><strong>Available</strong></p>
+              <% else %>
+                <p class="card-text text-danger text-end"><strong>Suspended</strong></p>
+              <% end %>
             </div>
           </div>
         </div>
