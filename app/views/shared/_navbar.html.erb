@@ -22,9 +22,9 @@
       <li class="nav-item d-none d-md-block">
         <%= link_to "Own a boat? Make $$$", "/boats/new", class: "nav-link" %>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown position-relative">
         <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-end position-absolute" aria-labelledby="navbarDropdown">
           <% if user_signed_in? %>
             <%= link_to "My rentals", "/rentals", class: "dropdown-item" %>
             <%= link_to "My boats", "/myboats", class: "dropdown-item" %>
