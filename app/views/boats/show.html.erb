@@ -24,7 +24,7 @@
             <% end %>
               <% if @boat.rentals.present? %>
                 <% @boat.rentals.each do |rental| %>
-                  <strong>Rented by:</strong> <%= rental.user.id %> <br>
+                  <strong>Rented by:</strong> <%= rental.user.email %> <br>
                   <p>From <%= rental.start_time.strftime("%Y-%m-%d") %> to <%= rental.end_time.strftime("%Y-%m-%d") %></p>
                 <% end %>
               <% else %>
